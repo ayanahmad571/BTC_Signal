@@ -34,7 +34,7 @@ while not done:
     
     # Calculate the "hold" value by multiplying the number of Bitcoins bought by the current price
     current_price = df.iloc[env.current_step-1]["close"]
-    print(f"LOOP_PRICE------{current_price}")
+    
     hold_value.append(bitcoins_bought * current_price)  # Track the "buy and hold" portfolio value
     
     # Optionally, print the portfolio value and actions

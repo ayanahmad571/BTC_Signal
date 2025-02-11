@@ -37,7 +37,7 @@ class BitcoinTradingEnv(gym.Env):
     def step(self, action):
         """Take an action (Buy/Sell/Hold) and return the next state, reward, and done flag."""
         current_price = self.df.iloc[self.current_step]["close"]  # Get current Bitcoin price
-        print(f"PRICE_FROM_GYM------{current_price}")
+        
 
         if action == 0:  # Buy action
             if self.balance >= current_price:  # Only buy if balance is enough

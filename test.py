@@ -27,13 +27,14 @@ bitcoins_bought = initial_balance / initial_price  # How many BTC you could buy 
 # Test the trained model
 while not done:
     action, _ = model.predict(obs)  # Predict the action (Buy/Sell/Hold)
-    obs, reward, done, info = env.step(action)  # Execute the action in the environment
-
+    obs, reward, done, info, holdings = env.step(action)  # Execute the action in the environment
+    
     # Track portfolio value from the environment info
     portfolio_value.append(info['portfolio_value'])  # Track PPO model's portfolio value
     
     # Calculate the "hold" value by multiplying the number of Bitcoins bought by the current price
-    current_price = df.iloc[env.current_step]["close"]
+    current_price = df.iloc[env.current_step-1]["close"]
+    print(f"LOOP_PRICE------{current_price}")
     hold_value.append(bitcoins_bought * current_price)  # Track the "buy and hold" portfolio value
     
     # Optionally, print the portfolio value and actions

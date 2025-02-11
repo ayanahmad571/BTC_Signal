@@ -8,7 +8,7 @@ class BitcoinTradingEnv(gym.Env):
         super(BitcoinTradingEnv, self).__init__()
 
         self.df = df  # Data containing technical indicators and price info
-        self.current_step = 0  # Initialize step counter
+        self.current_step = -1  # Initialize step counter
 
         # Action space: 3 discrete actions (Buy, Sell, Hold)
         self.action_space = spaces.Discrete(3)
@@ -37,6 +37,7 @@ class BitcoinTradingEnv(gym.Env):
     def step(self, action):
         """Take an action (Buy/Sell/Hold) and return the next state, reward, and done flag."""
         current_price = self.df.iloc[self.current_step]["close"]  # Get current Bitcoin price
+        print(f"PRICE_FROM_GYM------{current_price}")
 
         if action == 0:  # Buy action
             if self.balance >= current_price:  # Only buy if balance is enough
@@ -60,7 +61,7 @@ class BitcoinTradingEnv(gym.Env):
 
         # Return the observation, reward, done flag, and info with portfolio value
         info = {'portfolio_value': portfolio_value}
-        return self._next_observation(), reward, done, info
+        return self._next_observation(), reward, done, info, self.holdings
 
 
     def render(self, mode='human'):

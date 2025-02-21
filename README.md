@@ -1,2 +1,2 @@
-# finance_python_projects
-Projects to practise Various Python Projects (Quant, Models, etc)
+# BTC Signal Generation using Machine Learning.
+Trained a PPO, MLP ML model and running that in a gym env.
